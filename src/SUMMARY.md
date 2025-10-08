@@ -10,5 +10,10 @@
 - [Execution Units](./modules/execution-units.md)
 - [FP Pipeline](./modules/fp-pipeline.md)
 
+# Subsystems
+- [Micro-op Lifecycle](./subsystems/microop-lifecycle.md)
+- [Execution](./subsystems/execution.md)
+- [Trap Handling](./subsystems/trap-handling.md)
+
 ---
 - [References](./references.md)
