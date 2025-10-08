@@ -10,3 +10,7 @@ All of these indices wrap.
   * `head`: The oldest micro-op is at the head of the buffer and will be the next one committed.
   * `tail`: New micro-ops are inserted at the tail index.
   * `pnr`: "Point of No Return"
+
+BOOM uses the "Point of No Return" (PNR) as a second commit head that runs ahead (has higher indices) of the actual commit head.
+The PNR is responsible for marking the next instruction that might misspeculate or generate an exception.
+These include unresolved branches and untranslated memory operations.
