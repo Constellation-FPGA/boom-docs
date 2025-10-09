@@ -14,6 +14,7 @@
 # Subsystems
 - [Micro-op Lifecycle](./subsystems/microop-lifecycle.md)
 - [Execution](./subsystems/execution.md)
+- [Control and Status Registers (CSRs)](./subsystems/csrs.md)
 - [Trap Handling](./subsystems/trap-handling.md)
 
 # Stages
