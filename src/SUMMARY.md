@@ -5,6 +5,7 @@
 - [Elaboration-Time Parameters](./elaboration-time/parameters.md)
 
 # Individual Modules
+- [Micro-ops](./modules/micro-ops.md)
 - [LSU (Load-Store Unit)](./modules/lsu.md)
 - [ROB (Re-Order Buffer)](./modules/rob.md)
 - [Execution Units](./modules/execution-units.md)
