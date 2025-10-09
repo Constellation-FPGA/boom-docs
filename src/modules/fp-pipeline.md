@@ -16,8 +16,21 @@ The FP pipeline handles:
   * The floating-point register file (`frf` or `fregfile`)
   * Controlling and performing FP arithmetic with the FP execution units
 
-## Loading and Storing
-Instead of the `FPUExeUnit` handling FP loads/stores itself, it delegates a majority of the work to the integer address generation unit (the `ALUExeUnit` where `hasMem = true`), then adds to the LSU's load/store queues.
+## Why is this done this way?
+From our understanding, having all floating-point operations contained within the `FpPipeline` allows for easier customization, since all FP logic is fully contained within a single module.
+This allows all the FP-related ports connecting everything to be found easily by the Chisel compiler and optimized away by later passes.
 
+## Loading and Storing
+Instead of the `FPUExeUnit` handling FP loads/stores itself, it delegates a majority of the work.
+
+Floating-point loads only go to the FP pipeline to write the loaded value.
+The rest of the instruction does not touch any floating-point state, so it never goes through the FPU.
+The integer load/store portion of the core handles floating-point loads.
+The loaded value in the memory-handling execution units is connected to the FP pipeline's register file through the pipeline's `ll_wports`.
 This connection happens at the core's top-level, in `core.scala`.
-The FP pipeline's `ll_wports` are connected to the memory-handling execution units.
+
+Floating-point stores are a little special because they are decoded into two uops.
+The first is an `F2I` operation, which converts BOOM's floating-point numbers to traditional IEEE 754 floating-point numbers.
+This is required because BOOM internally uses Hardfloat's recoded representation, not the IEEE one.
+Second, the converted IEEE floating-point value is written out to memory.
+To do this, the FP pipeline passes the destination address to the integer address generation unit (the `ALUExeUnit` where `hasMem = true`), then adds the converted IEEE value to the LSU's store queue.
