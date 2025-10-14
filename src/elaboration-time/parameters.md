@@ -8,6 +8,8 @@ In most cases, these are already set by the BOOM core configuration.
 BOOM is highly configurable by design.
 It has a number of objects/classes that control how wide/many/deep many BOOM units are.
 
+<!-- toc -->
+
 ## `BoomCoreParams`
 The `BoomCoreParams` class configure core-wide parameters.
 These include the number of bytes fetched, the width of the ROB, the number of entries in the load and store queues, etc.
