@@ -67,3 +67,7 @@ The parameter class is small enough to list below:
 
 ## `BoomTileParams`
 
+## Misc.
+Throughout BOOM, there is the notion of "wakeup ports".
+These are the number of ports to another module that are used to record the results of a micro-op's execution completion(?).
+For example, the ROB's wakeup ports are used to set the number of other modules which will writeback into the ROB.
