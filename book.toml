@@ -5,6 +5,10 @@ multilingual = false
 src = "src"
 title = "(Sonic)BOOM (Berkeley Out-of-Order Machine) Documentation: The Reverse-Engineered Version"
 
+[preprocessor.toc]
+command = "mdbook-toc"
+renderer = ["html"]
+
 [output.html]
 default-theme = "dark"
 curly-quotes = true
