@@ -38,3 +38,11 @@ Changing these parameters has massive implications for the generated hardware an
 * `numRobEntries`: The number of entries in the ROB.
 * `numLdqEntries`: The number of outstanding loads that are allowed to be queued for handling.
 * `numStqEntries`: The number of outstanding stores that are allowed to be queued for handling.
+* `enableSFBOpt`: Enable "Short-Forward Branch" optimizations.
+    > This optimization improves IPC by recoding difficult-to-predict branches into internal predicated micro-ops (Zhao, 2015).
+
+  This means that instead of trying to predict the branch, instructions on both sides of the branch are fed through and turned into micro-ops, and each micro-op has the branch's condition attached as a predicate.
+  The micro-ops are executed normally, while the branch's condition is evaluated (the control-flow changing branch has been removed).
+  When the condition's result is finally known, the predicated micro-op's predicate condition is updated.
+  If the predicate condition was incorrect, then the micro-op's speculative execution is cleaned up and rolled back, while the other micro-op sequence is allowed to commit to architectural state.
+  (See [Wikipedia's Predication page](https://en.wikipedia.org/wiki/Predication_(computer_architecture)) for more information.)
