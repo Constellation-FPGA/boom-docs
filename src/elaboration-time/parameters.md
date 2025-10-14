@@ -46,3 +46,24 @@ Changing these parameters has massive implications for the generated hardware an
   When the condition's result is finally known, the predicated micro-op's predicate condition is updated.
   If the predicate condition was incorrect, then the micro-op's speculative execution is cleaned up and rolled back, while the other micro-op sequence is allowed to commit to architectural state.
   (See [Wikipedia's Predication page](https://en.wikipedia.org/wiki/Predication_(computer_architecture)) for more information.)
+
+## `IssueParams`
+The `IssueParams` class is used to have execution units inform the scheduler and ROB the resources and availability of each execution unit.
+This is a relatively small parameter class, so we list all fields below:
+
+* `dispatchWidth`: The number of micro-ops which may be dispatched/inserted to the issue queue per clock cycle.
+* `issueWidth`: The number of micro-ops which may be issued to the execution unit (and removed from the issue queue) per clock cycle.
+* `numEntries`: The number of entries that can be stored in this issue queue (the depth of the queue).
+  These are micro-ops which are sitting idle while waiting for the respective execution unit's resources to become available.
+* `iqType`: The type of the issue queue (integer, memory, floating-point, etc.).
+  This is a bit-mask enumerated value used to determine which issue queue (and therefore which execution unit) the micro-op should be sent to.
+
+## `FtqParameters`
+This configures the fetch target queue in the core's front-end.
+The queue's logic is discussed in greater detail in [the FTQ modules's section](../modules/ftq.md).
+The parameter class is small enough to list below:
+
+* `nEntries`: The number of entries in the FTQ.
+
+## `BoomTileParams`
+
