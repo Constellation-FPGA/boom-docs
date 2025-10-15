@@ -40,6 +40,8 @@ Changing these parameters has massive implications for the generated hardware an
 * `numRobEntries`: The number of entries in the ROB.
 * `numLdqEntries`: The number of outstanding loads that are allowed to be queued for handling.
 * `numStqEntries`: The number of outstanding stores that are allowed to be queued for handling.
+* `maxBrCount`: The maximum number of branches that can be speculatively in-flight simultaneously.
+  For example, with `maxBrCount = 2`, Boom could speculatively execute both sides of 2 branches at the same time.
 * `enableSFBOpt`: Enable "Short-Forward Branch" optimizations.
     > This optimization improves IPC by recoding difficult-to-predict branches into internal predicated micro-ops (Zhao, 2015).
 
