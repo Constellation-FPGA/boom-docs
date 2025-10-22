@@ -45,11 +45,14 @@ Changing these parameters has massive implications for the generated hardware an
 * `enableSFBOpt`: Enable "Short-Forward Branch" optimizations.
     > This optimization improves IPC by recoding difficult-to-predict branches into internal predicated micro-ops (Zhao, 2015).
 
-  This means that instead of trying to predict the branch, instructions on both sides of the branch are fed through and turned into micro-ops, and each micro-op has the branch's condition attached as a predicate.
-  The micro-ops are executed normally, while the branch's condition is evaluated (the control-flow changing branch has been removed).
+  This means that instead of trying to predict a branch which jumps a very short distance forward, instructions on both sides of the branch are fed through and turned into micro-ops, and each micro-op has the branch's condition attached as a predicate.
+  The control-flow branch is replaced with a "set-flag" uop, which changes the condition predicate in a special predicate register file (`pregfile`).
+  All micro-ops are executed normally, while the branch's (set-flag) condition is evaluated.
+  The micro-ops cannot be committed until the set-flag's data-dependency is resolved, which allows the core to mimic a change in control flow.
   When the condition's result is finally known, the predicated micro-op's predicate condition is updated.
-  If the predicate condition was incorrect, then the micro-op's speculative execution is cleaned up and rolled back, while the other micro-op sequence is allowed to commit to architectural state.
+  If the predicate condition was incorrect, then the micro-op's "speculative execution" is cleaned up and rolled back, while the other micro-op sequence is allowed to commit to architectural state.
   (See [Wikipedia's Predication page](https://en.wikipedia.org/wiki/Predication_(computer_architecture)) for more information.)
+  A "short branch" is one where the branch's offset is greater than 0 and less than the size of a cache line (64 bytes by default in our BOOMs).
 
 ## `IssueParams`
 The `IssueParams` class is used to have execution units inform the scheduler and ROB the resources and availability of each execution unit.
