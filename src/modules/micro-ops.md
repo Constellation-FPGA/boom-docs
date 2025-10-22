@@ -24,6 +24,8 @@ For example, the default small BOOM V3 configuration has:
 
 Below we have a list describing what some of the fields in the micro-op are:
 * `pdst`: Index of the destination *physical* register the micro-op's result should be placed in.
+* `stale_pdst`: ***PREVIOUS*** index of the destination *physical* register the micro-op's was assigned by the register renamer.
+  This is needed for and used when rolling back the register renamer's state; it is otherwise unused.
 * `prs1`: Index of the first source *physical* register the micro-op's result should be read from.
 * `prs2`: Index of the second source *physical* register the micro-op's result should be read from, if it needs a second source.
 * `prs3`: Index of the third source *physical* register the micro-op's result should be read from, if it needs a third source.
