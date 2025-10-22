@@ -8,6 +8,7 @@
 - [Micro-ops](./modules/micro-ops.md)
 - [Register File](./modules/regfile.md)
 - [FTQ (Fetch Target Queue)](./modules/ftq.md)
+- [Register Renamer](./modules/register-renamer.md)
 - [LSU (Load-Store Unit)](./modules/lsu.md)
 - [ROB (Re-Order Buffer)](./modules/rob.md)
 - [Execution Units](./modules/execution-units.md)
