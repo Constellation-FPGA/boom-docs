@@ -6,6 +6,7 @@
 
 # Individual Modules
 - [Micro-ops](./modules/micro-ops.md)
+- [FTQ (Fetch Target Queue)](./modules/ftq.md)
 - [LSU (Load-Store Unit)](./modules/lsu.md)
 - [ROB (Re-Order Buffer)](./modules/rob.md)
 - [Execution Units](./modules/execution-units.md)
